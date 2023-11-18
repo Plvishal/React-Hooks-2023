@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import './styles/style.css';
 
@@ -9,12 +9,11 @@ function IndexC() {
   const [blogs, setBlogs] = useState([]);
   // useRef
   const titleRef = useRef(null);
-  //   let blog = [
-  //     {
-  //       title: '',
-  //       content: '',
-  //     },
-  //   ];
+  // uqse of the useEffect
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []); //adding a empty[]dependencies means this effect happening only the initail render
+
   function handleSubmit(e) {
     e.preventDefault();
     // setBlogs([{ title, content }]);
