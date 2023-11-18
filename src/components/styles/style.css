@@ -66,3 +66,8 @@ button {
   background-color: #512da8;
   cursor: pointer;
 }
+
+.del-btn {
+  margin-left: auto;
+  cursor: pointer;
+}

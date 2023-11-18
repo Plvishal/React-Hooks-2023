@@ -19,6 +19,9 @@ function IndexC() {
     setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
     setFormData({ title: '', content: '' });
   }
+  function removeBLogs(i) {
+    setBlogs(blogs.filter((blog, index) => i !== index));
+  }
   return (
     <>
       <div className="form_container">
@@ -43,7 +46,9 @@ function IndexC() {
             rows={4}
             cols={30}
             value={formData.content}
-            onChange={(e) => setFormData({title:formData.title, content: e.target.value })}
+            onChange={(e) =>
+              setFormData({ title: formData.title, content: e.target.value })
+            }
           ></textarea>
           <hr />
           <button>Add</button>
@@ -57,6 +62,11 @@ function IndexC() {
             <div key={i} className="output_c">
               <h3>~{blog.title}</h3>
               <p>{blog.content}</p>
+              <div>
+                <button onClick={() => removeBLogs(i)} className="del-btn">
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
