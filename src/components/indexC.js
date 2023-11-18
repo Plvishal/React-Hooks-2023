@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import './styles/style.css';
 import { db } from '../firebaseinit';
+import { collection, addDoc } from 'firebase/firestore';
 
 function IndexC() {
   //   const [title, setTitle] = useState('');
@@ -24,12 +25,19 @@ function IndexC() {
     }
   }, [blogs]);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    titleRef.current.focus();
     // setBlogs([{ title, content }]);
     setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(db, 'blogs'), {
+      title: formData.title,
+      content: formData.content,
+      createdOn: new Date(),
+    });
+    console.log('Document written with ID: ', docRef.id);
     setFormData({ title: '', content: '' });
-    titleRef.current.focus();
   }
   function removeBLogs(i) {
     setBlogs(blogs.filter((blog, index) => i !== index));
