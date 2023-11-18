@@ -53,8 +53,8 @@ function IndexC() {
         <h1>Blogs</h1>
         <div>
           {blogs.map((blog, i) => (
-            <div key={i}>
-              <h3>{blog.title}</h3>
+            <div key={i} className="output_c">
+              <h3>~{blog.title}</h3>
               <p>{blog.content}</p>
             </div>
           ))}
