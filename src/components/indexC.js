@@ -61,6 +61,7 @@ function IndexC() {
             onChange={(e) =>
               setFormData({ title: formData.title, content: e.target.value })
             }
+            required
           ></textarea>
           <hr />
           <button>Add</button>
