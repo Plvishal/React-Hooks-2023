@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 
-export default function Login(){
-   const [email,setEmail] = useState("");
-   const [password, setPassword] = useState("");  
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    return(
-        <>
-        <h1>Login to the Portal!</h1>
-        <h3>Login</h3>
+  useEffect(() => {
+    localStorage.setItem('email', email);
+  }, [email]);
+
+  return (
+    <>
+      <h1>Login to the Portal!</h1>
+      <h3>Login</h3>
       <input
         placeholder="Enter Email"
         value={email}
@@ -27,12 +31,12 @@ export default function Login(){
       <br />
       <button
         onClick={() => {
-          console.log("Form submitted")
+          console.log('Form submitted');
         }}
       >
         Submit
       </button>
       <br />
-        </>
-    )
+    </>
+  );
 }
