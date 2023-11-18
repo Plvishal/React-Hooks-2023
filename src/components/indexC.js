@@ -14,6 +14,13 @@ function IndexC() {
     titleRef.current.focus();
   }, []); //adding a empty[]dependencies means this effect happening only the initail render
 
+  // title change on the codition which blog place top of thr array
+  useEffect(() => {
+    if (blogs.length) {
+      document.title = blogs[0].title;
+    }
+  }, [blogs]);
+
   function handleSubmit(e) {
     e.preventDefault();
     // setBlogs([{ title, content }]);
