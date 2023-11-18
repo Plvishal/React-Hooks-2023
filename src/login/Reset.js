@@ -8,6 +8,9 @@ export default function Reset() {
       setEmail(email);
     }
   }, []);
+  useEffect(() => {
+    localStorage.setItem('email', email);
+  }, [email]);
 
   return (
     <>
