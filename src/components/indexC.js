@@ -16,7 +16,8 @@ function IndexC() {
     e.preventDefault();
     setBlogs([{ title, content }]);
     setBlogs([{ title, content }, ...blogs]);
-
+    setTitle('');
+    setContent('');
     console.log(blogs);
   }
   return (
