@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import React from 'react';
 import './styles/style.css';
 
@@ -7,6 +7,8 @@ function IndexC() {
   //   const [content, setContent] = useState('');
   const [formData, setFormData] = useState({ title: '', content: '' });
   const [blogs, setBlogs] = useState([]);
+  // useRef
+  const titleRef = useRef(null);
   //   let blog = [
   //     {
   //       title: '',
@@ -18,6 +20,7 @@ function IndexC() {
     // setBlogs([{ title, content }]);
     setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
     setFormData({ title: '', content: '' });
+    titleRef.current.focus();
   }
   function removeBLogs(i) {
     setBlogs(blogs.filter((blog, index) => i !== index));
@@ -34,6 +37,7 @@ function IndexC() {
             name="title"
             placeholder="Enter your title here"
             value={formData.title}
+            ref={titleRef}
             onChange={(e) =>
               setFormData({ title: e.target.value, content: formData.content })
             }
