@@ -34,3 +34,11 @@ button {
   font-size: medium;
   margin-top: 10px;
 }
+.showblog_container {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px;
+  background: linear-gradient(to right, #e53935, #e35d5b);
+  border-radius: 5px;
+}
