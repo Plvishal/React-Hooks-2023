@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import './styles/style.css';
 import { db } from '../firebaseinit';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
 function IndexC() {
   //   const [title, setTitle] = useState('');
@@ -15,6 +15,22 @@ function IndexC() {
   useEffect(() => {
     titleRef.current.focus();
   }, []); //adding a empty[]dependencies means this effect happening only the initail render
+
+  // Fetching data from the database
+  useEffect(() => {
+    async function fetchData() {
+      const snapShot = await getDocs(collection(db, 'blogs'));
+
+      const blogs = snapShot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      });
+      setBlogs(blogs);
+    }
+    fetchData();
+  }, []);
 
   // title change on the codition which blog place top of thr array
   useEffect(() => {
