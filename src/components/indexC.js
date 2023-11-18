@@ -18,6 +18,8 @@ function IndexC() {
   useEffect(() => {
     if (blogs.length) {
       document.title = blogs[0].title;
+    } else {
+      document.title = 'No Blogs !!';
     }
   }, [blogs]);
 
