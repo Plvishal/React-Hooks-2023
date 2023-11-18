@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useLocalStorege from './useLocalStorege';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // Always order of the useEffect is matter in react order is :1 getItems 2.setItems
-  useEffect(() => {
-    let email = localStorage.getItem('email');
-    if (email) {
-      setEmail(email);
-    }
-  }, []);
+  // useEffect(() => {
+  //   let email = localStorage.getItem('email');
+  //   if (email) {
+  //     setEmail(email);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('email', email);
-  }, [email]);
+  // useEffect(() => {
+  //   localStorage.setItem('email', email);
+  // }, [email]);
+  const { email, setEmail } = useLocalStorege();
 
   return (
     <>

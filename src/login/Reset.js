@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import useLocalStorege from './useLocalStorege';
 
 export default function Reset() {
-  const [email, setEmail] = useState('');
-  useEffect(() => {
-    let email = localStorage.getItem('email');
-    if (email) {
-      setEmail(email);
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem('email', email);
-  }, [email]);
-
+  // const [email, setEmail] = useState('');
+  // useEffect(() => {
+  //   let email = localStorage.getItem('email');
+  //   if (email) {
+  //     setEmail(email);
+  //   }
+  // }, []);
+  // useEffect(() => {
+  //   localStorage.setItem('email', email);
+  // }, [email]);
+  const { email, setEmail } = useLocalStorege();
   return (
     <>
       <h3>Reset Password for</h3>
