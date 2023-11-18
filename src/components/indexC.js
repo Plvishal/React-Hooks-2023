@@ -16,7 +16,7 @@ function IndexC() {
 
   // title change on the codition which blog place top of thr array
   useEffect(() => {
-    if (blogs.length) {
+    if (blogs.length && blogs[0].title) {
       document.title = blogs[0].title;
     } else {
       document.title = 'No Blogs !!';
