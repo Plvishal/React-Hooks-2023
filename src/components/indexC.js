@@ -5,8 +5,19 @@ import './styles/style.css';
 function IndexC() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [blogs, setBlogs] = useState([]);
+  //   let blog = [
+  //     {
+  //       title: '',
+  //       content: '',
+  //     },
+  //   ];
   function handleSubmit(e) {
     e.preventDefault();
+    setBlogs([{ title, content }]);
+    setBlogs([{ title, content }, ...blogs]);
+
+    console.log(blogs);
   }
   return (
     <>
@@ -40,8 +51,12 @@ function IndexC() {
       <div className="showblog_container">
         <h1>Blogs</h1>
         <div>
-          <h1>{title}</h1>
-          <p>{content}</p>
+          {blogs.map((blog, i) => (
+            <div key={i}>
+              <h3>{blog.title}</h3>
+              <p>{blog.content}</p>
+            </div>
+          ))}
         </div>
       </div>
     </>
