@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import './styles/style.css';
+import { db } from '../firebaseinit';
 
 function IndexC() {
   //   const [title, setTitle] = useState('');
