@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import './styles/style.css';
 import { db } from '../firebaseinit';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 function IndexC() {
   //   const [title, setTitle] = useState('');
@@ -31,7 +31,9 @@ function IndexC() {
     // setBlogs([{ title, content }]);
     setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
     // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, 'blogs'), {
+    const docRef = doc(collection(db, 'blogs'));
+    await setDoc(docRef, {
+      //setDoc is useful when you are creating ID yourself (if id available then replace otherwise create new id)
       title: formData.title,
       content: formData.content,
       createdOn: new Date(),
