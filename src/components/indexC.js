@@ -2,7 +2,13 @@ import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import './styles/style.css';
 import { db } from '../firebaseinit';
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  setDoc,
+} from 'firebase/firestore';
 
 function IndexC() {
   //   const [title, setTitle] = useState('');
@@ -18,9 +24,19 @@ function IndexC() {
 
   // Fetching data from the database
   useEffect(() => {
-    async function fetchData() {
-      const snapShot = await getDocs(collection(db, 'blogs'));
+    // async function fetchData() {
+    //   const snapShot = await getDocs(collection(db, 'blogs'));
 
+    //   const blogs = snapShot.docs.map((doc) => {
+    //     return {
+    //       id: doc.id,
+    //       ...doc.data(),
+    //     };
+    //   });
+    //   setBlogs(blogs);
+    // }
+    // fetchData();
+    const unsub = onSnapshot(collection(db, 'blogs'), (snapShot) => {
       const blogs = snapShot.docs.map((doc) => {
         return {
           id: doc.id,
@@ -28,8 +44,7 @@ function IndexC() {
         };
       });
       setBlogs(blogs);
-    }
-    fetchData();
+    });
   }, []);
 
   // title change on the codition which blog place top of thr array
@@ -45,7 +60,7 @@ function IndexC() {
     e.preventDefault();
     titleRef.current.focus();
     // setBlogs([{ title, content }]);
-    setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+    // setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
     // Add a new document with a generated id.
     const docRef = doc(collection(db, 'blogs'));
     await setDoc(docRef, {
@@ -57,8 +72,10 @@ function IndexC() {
     console.log('Document written with ID: ', docRef.id);
     setFormData({ title: '', content: '' });
   }
-  function removeBLogs(i) {
-    setBlogs(blogs.filter((blog, index) => i !== index));
+  async function removeBLogs(id) {
+    // setBlogs(blogs.filter((blog, index) => i !== index));
+    const docRef = doc(db, 'blogs', id);
+    await deleteDoc(docRef);
   }
   return (
     <>
@@ -103,7 +120,10 @@ function IndexC() {
               <h3>~{blog.title}</h3>
               <p>{blog.content}</p>
               <div>
-                <button onClick={() => removeBLogs(i)} className="del-btn">
+                <button
+                  onClick={() => removeBLogs(blog.id)}
+                  className="del-btn"
+                >
                   Delete
                 </button>
               </div>
